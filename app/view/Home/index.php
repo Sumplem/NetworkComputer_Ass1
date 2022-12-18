@@ -5,295 +5,86 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ChatChit</title>
     <link rel="stylesheet" href="<?php echo _WEB_ROOT ?>/app/view/styles/Main.css">
-    <link href="/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo _WEB_ROOT ?>/app/view/styles/Tooltip.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/peerjs@1.3.2/dist/peerjs.min.js"></script>
 </head>
 <body>
     <div id="menu">
-        <div class="icon">
-            <i class="fa-solid fa-house"></i>
+        <div id="accountButton" class="icon tooltip">
+            <span class="material-icons">
+            person
+            </span>
+            <div class="tooltiptext right">Account</div>
         </div>
-        <div class="icon active">
-            <i class="fa-solid fa-comment"></i>
+        <div id="friendListButton" class="icon tooltip active">
+            <span class="material-icons">
+            contacts
+            </span>
+            <div class="tooltiptext right">Friend list</div>
         </div>
-        <div class="icon">
-            <i class="fa-solid fa-address-book"></i>
-        </div>
-        <div class="icon">
-            <i class="fa-solid fa-user-large"></i>
+        <div id="addFriendButton" class="icon tooltip">
+            <span class="material-icons">
+            person_add
+            </span>
+            <div class="tooltiptext right">Add friends</div>
         </div>
     </div>
-    <div id="chatList">
-        <div id="chatListTitle">Chats</div>
-        <input type="search" class="searchBar" placeholder="Search"></input>
-        <div class="chatListContainer">
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
+    <div id="functions">
+        <div id="account" class="function">
+            <div class="avatar"></div>
+            <div class="name"><?php echo $User['Name'];?></div>
+            <a href="<?php echo _WEB_ROOT;?>/Login/logout">
+                <button class="modButton" >Logout</button>
+            </a>
+        </div>
+
+        <div id="friendList" class="function activeFunction">
+            <div class="title">Friend list</div>
+            <input id="searchFriend" type="search" class="searchBar" placeholder="Search" name='searchFriend'></input>
+            <div id="friendListContainer" class="container">
+                <!-- <div class="friend">
+                    <div class="avatar"></div>
+                    <div class="name">Luc Gia Hung</div>
+                </div> -->
             </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="friendChat">
-                <div class="friendAvatar"></div>
-                <div class="col">
-                    <div class="friendName">Luc Gia Hung</div>
-                    <div class="chatFrame">
-                        <div class="lastMessage">aloooooooaaaaaaaaaaaaaaaaaaaaaaaaooooooooooooooooooooooooooooooooo</div>
-                        <div class="messageTime">12:30</div>
-                    </div>
-                </div>
-            </div>
-            <hr>
+        </div>
+
+        <div id="addFriend" class="function">
+            <div class="title">Add friend</div>
+            <input id="searchContact" type="search" class="searchBar" placeholder="Search"></input>
+            <div id="contactListContainer" class="container"></div>
+            <div class="title" id='frquestTitle'>Friend request</div>
+            <div id="friendRequestContainer" class="container"></div>
         </div>
     </div>
     <div id="chatDisplay">
         <div id="currentContact">
             <div id="contactAvatar"></div>
             <div class="contactTitle">
-                <div id="contactName">Luc Gia Hung</div>
-                <div id="online">Đang hoạt động</div>
+                <div id="contactName">Choose friend to start chat</div>
+                <div id="status"></div>
             </div>
         </div>
-        <div id="messageDisplay">
-            <div class="messageBox">
-                <div class="messageAvatar"></div>
-                <div class="messageContainer">
-                    <div class="messageRow">
-                        <div>AAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaあああああああああああああああああああああああaaaaaaaaaaaaaaaaaaaaaa</div>
-                    </div>
-                    <div class="messageRow">
-                        <div>AAA</div>
-                    </div>
-                    <div class="messageRow">
-                        <div>AAAaaaaaaaaaaaaa</div>
-                    </div>
-                </div>
-            </div>
-            <div class="messageBox myMsg">
-                <div class="messageContainer myMsg">
-                    <div class="messageRow myMsg">
-                        <div>aaaaaaaa</div>
-                    </div>
-                    <div class="messageRow myMsg">
-                        <div>Bruh</div>
-                    </div>
-                    <div class="messageRow myMsg">
-                        <div>aaaaaaaa</div>
-                    </div>
-                </div>
-            </div>
-            <div class="messageBox">
-                <div class="messageAvatar"></div>
-                <div class="messageContainer">
-                    <div class="messageRow">
-                        <div>AAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaあああああああああああああああああああああああaaaaaaaaaaaaaaaaaaaaaa</div>
-                    </div>
-                    <div class="messageRow">
-                        <div>AAA</div>
-                    </div>
-                    <div class="messageRow">
-                        <div>AAAaaaaaaaaaaaaa</div>
-                    </div>
-                </div>
-            </div>
-            <div class="messageBox myMsg">
-                <div class="messageContainer myMsg">
-                    <div class="messageRow myMsg">
-                        <div>aaaaaaaa</div>
-                    </div>
-                    <div class="messageRow myMsg">
-                        <div>Bruh</div>
-                    </div>
-                    <div class="messageRow myMsg">
-                        <div>aaaaaaaa</div>
-                    </div>
-                </div>
-            </div>
-            <div class="messageBox">
-                <div class="messageAvatar"></div>
-                <div class="messageContainer">
-                    <div class="messageRow">
-                        <div>AAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaあああああああああああああああああああああああaaaaaaaaaaaaaaaaaaaaaa</div>
-                    </div>
-                    <div class="messageRow">
-                        <div>AAA</div>
-                    </div>
-                    <div class="messageRow">
-                        <div>AAAaaaaaaaaaaaaa</div>
-                    </div>
-                </div>
-            </div>
-            <div class="messageBox myMsg">
-                <div class="messageContainer myMsg">
-                    <div class="messageRow myMsg">
-                        <div>aaaaaaaa</div>
-                    </div>
-                    <div class="messageRow myMsg">
-                        <div>Bruh</div>
-                    </div>
-                    <div class="messageRow myMsg">
-                        <div>aaaaaaaa</div>
-                    </div>
-                </div>
-            </div>
-            <div class="messageBox myMsg">
-                <div class="messageContainer myMsg">
-                    <div class="messageRow myMsg">
-                        <div>aaaaaaaa</div>
-                    </div>
-                    <div class="messageRow myMsg">
-                        <div>Bruh</div>
-                    </div>
-                    <div class="messageRow myMsg">
-                        <div>aaaaaaaa</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="messageDisplay"></div>
         <div id="functionsBar">
-            <form action="POST" id="messageSendForm">
+            <div id="messageSendForm" >
                 <input type="text" id="inputMessage" placeholder="Input something...">
-                <button id="sendMessageButton">Send</button>
-            </form>
-        </div>
-    </div>
-    <div id="infomation">
-        <div class="avatarEdit">
-            <div class="infoAvatar messageAvatar"></div>
-        </div>
-        <hr>
-        <div class="infoList">
-            <p>Trang Cá Nhân</p>
-            <div class="infoIcon">
-                <i class="fa-solid fa-arrow-right "></i>    
+                <button id="sendMessageButton" onclick="sendMessage()">Send</button>
             </div>
         </div>
     </div>
+    <div id="infomation"></div>
 </body>
-<script src="https://unpkg.com/peerjs@1.3.2/dist/peerjs.min.js"></script>
+<script src="<?php echo _WEB_ROOT ?>/app/view/scripts/FunctionsControl.js"></script>
 </html>
+
+<?php
+require_once('app/function_scripts/setNotify.php');
+require_once('app/function_scripts/localStorage.php');
+require_once('app/function_scripts/p2pChat.php');
+require_once('app/function_scripts/loadData.php');
+require_once('app/function_scripts/Search.php');
+require_once('app/function_scripts/displayInfo.php');
+require_once('app/function_scripts/addFriend.php');
+?>

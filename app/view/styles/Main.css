@@ -1,6 +1,7 @@
 :root {
     --color-navigator :linear-gradient(to bottom,white 60%,rgb(247, 244, 244) 100%);
     --border-style : 1px solid rgb(230, 227, 227);
+    --icon-color: #2e6b56;
 }
 
 body {
@@ -8,50 +9,103 @@ body {
     padding: 0;
     display: flex;
     flex-direction: row;
+    overflow-y: scroll;
 }
 
 #menu {
     width: 5%;
     border-right: var(--border-style);
-    padding: 0 5px 0 5px;
+    padding-top: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    gap: 25px;
 }
 
 .icon{
-    color:aquamarine; 
+    color:var(--icon-color); 
     font-size: 28px; 
-    margin: 25px 0 0 0;
     height: 45px;
-    width: 45px;
-    border-radius: 50%;
+    width: 100%;
+    /* border-radius: 50%; */
     display: flex;
     justify-content:center;
     align-items:center;
+    cursor: pointer;
 }
 
-.active {
-    background-color:aquamarine;
+.icon:hover {
+    background-color:var(--icon-color);
     color: #fff;
 }
 
+.material-icons {
+    font-size: 48px !important;
+}
 
-#chatList {
+.icon.active {
+    background-color:var(--icon-color);
+    color: #fff;
+}
+
+#functions {
     width: 25%;
     border-right: var(--border-style);
+    position: relative;
+}
+
+.activeFunction {
+    visibility: visible !important;
+    right: 0% !important;
+}
+
+.function {
+    width: 100%;
     display: flex;
     flex-direction: column;
     height:100vh;
+    position: absolute;
+    right: 100%;
+    top: 0;
+    visibility: hidden;
 }
 
-#chatListTitle {
+#account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+#account .avatar {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-color: black;
+}
+
+#account .name {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.modButton {
+    width: 104px;
+    height: 38px;
+    border-radius: 10px;
+}
+
+.modButton:hover {
+    background-color: red;
+}
+
+.title {
     height: 10vh;
     padding: 0 5px 0 5px;
     font-weight: bold;
     font-size: 2em;
-    background: var(--color-navigator);
     margin: 10px 0 0 5px;
 }
 .searchBar{
@@ -64,71 +118,59 @@ body {
     margin: -15px 0 10px 9px;
 }
 
-.chatListContainer {
+.container {
     height: 90vh;
     overflow-y: scroll;
 }
 
-.chatListContainer::-webkit-scrollbar {
+.container::-webkit-scrollbar {
     display: none;
 }
 
-hr{
-    width: 80%;
-    /* margin: -10px 0 10px 20px; */
-    text-align: center;
-    margin-top: -5px;
-    margin-bottom: 10px;
-    
-}
-
-.friendChat {
+.friend {
     height: 60px;
     padding: 2px 5px 0 5px;
     display: flex;
     flex-direction: row;
+    gap: 10px;
     margin: 5px 0;
     cursor: pointer;
     background: linear-gradient(to bottom,white 80%);
+    border-bottom: 2px solid black;
+    align-items: center;
     /* border-bottom: 1px solid black; */
 }
 
+.friend:hover {
+    transition-duration: 0.2s;
+    translate: 15%;
+    transform: scale(1.2);
+}
 
-.friendChat .friendAvatar {
-    margin: 0 5px 5px 0;
+.friend .avatar {
+    margin: 0;
     height: 48px;
     width: 48px;
     border-radius: 50%;
-    background: red;
+    background: greenyellow;
 }
 
-.friendChat .col {
+.friend .avatar.notify::before {
+    content: '!';
     display: flex;
-    flex-direction: column;
-    max-width: 80%;
-    height: 100%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 65%;
+    left: 70%;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: red;
 }
 
-.friendChat .col .friendName {
+.friend .name {
     font-weight: bold;
-}
-
-.lastMessage {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-top: 10px;
-    width: 200px;
-}
-
-.chatFrame{
-    display: flex;
-}
-
-.messageTime{
-    margin:10px 0 0 14px;
-    opacity: 0.6;
-    font-size: 15px;
-    
 }
 
 #chatDisplay {
@@ -142,8 +184,7 @@ hr{
     align-items: center;
     height: 10vh;
     padding: 0 5px 0 5px;
-    background: var(--color-navigator);
-    margin: 10px 0 10px 10px;
+    border-bottom: var(--border-style);
 }
 
 #contactAvatar {
@@ -157,7 +198,7 @@ hr{
 .contactTitle {
     display:block;
 }
-#online{
+#status{
     color: rgb(0, 192, 0);
 }
 
@@ -202,14 +243,17 @@ hr{
 .messageRow {
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 .messageRow > div {
+    display: inline-block;
+    max-width: 100%;
     padding: 7px 10px;
     margin: 0 0 3px 3px;
     border-radius: 20px;
     background-color: rgb(218, 213, 213);
-    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .myMsg {
@@ -260,32 +304,37 @@ hr{
 
 #infomation {
     width: 25%;
-    padding: 0 5px 0 5px;
-}
-
-.avatarEdit{
-    display:flex;
-    justify-content: center;
-    margin: 20px 0 50px 0;
-}
-
-.infoAvatar{
-    background-color: black;
-    height: 130px;
-    width: 130px;
-}
-
-.infoList{
-    font-size: 16pt;
     display: flex;
-    /* font-weight:  bold; */
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 0 20px -22px 20px;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    gap: 20px;
 }
 
-.infoIcon{
-    margin-top: 21px;
+#infomation .avatar{
+    height: 100px;
+    width: 100px;
+    display: flex;
+}
+
+#infomation .avatar {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-color: black;
+}
+
+#infomation .name {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+#friendRequestContainer.container {
+    height: 30vh;
+}
+
+#contactListContainer.container {
+    height: 50vh;
 }
 
 /* .infoList:hover{

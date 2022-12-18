@@ -1,0 +1,63 @@
+.tooltip {
+    position: relative;
+    /* display: inline-block; */
+    /*If you want dots under the hoverable text*/
+    /* border-bottom: 1px dotted black; */
+}
+  
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    font-size: 20px;
+
+   /* Position the tooltip text*/
+    position: absolute;
+    z-index: 30;
+}
+  
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+/* Top */
+.tooltiptext.top {
+    border-radius: 6px 6px 0 6px;
+    bottom: calc(100% + 5px);
+    right: 50%;
+}
+
+.tooltiptext.top::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    margin-left: -10px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+    border-width: 0 5px 5px 5px;
+}
+
+/* Right */
+.tooltiptext.right {
+    border-radius: 0px 6px 6px 6px;
+    left: calc(100% + 5px);
+    right: 50%;
+    font-size: 20px;
+}
+
+.tooltiptext.right::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -10px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+    border-width: 0 5px 5px 5px;
+}

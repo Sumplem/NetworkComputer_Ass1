@@ -7,42 +7,47 @@ const Name = document.getElementById('name');
 const phone = document.getElementById('phone');
 const email = document.getElementById('email');
 const user_name = document.getElementById('user_name');
-const pwd = document.getElementById('pwd');
-const pwd_again = document.getElementById('pwd-again');
-const form = document.getElementById('form');
+const pass = document.getElementById('pass');
+const pass_again = document.getElementById('pass_again');
 
-form.onsubmit = function(e){
+function validate(event){
     var bool = false;
 	var message = "";
 	if(!regex_name.test(Name.value)){
-		message += "-Sai tên!\n";
+		message += "-Invalid name!\n";
 		bool = true;
 	}
-	if(!regex_phone_num.test(phone.value)){
-		message += "-Số điện thoại phải có 10 số!\n";
-		bool = true;
+	if(phone.value != ''){
+		if(!regex_phone_num.test(phone.value)){
+			message += "-Phone number must have 10 digits!\n";
+			bool = true;
+		}
 	}
-	if(!regex_email.test(email.value)){
-		message += "-Sai email!\n";
-		bool = true;
+	if(email.value != ''){
+		if(!regex_email.test(email.value)){
+			message += "-Invalid email!\n";
+			bool = true;
+		}
 	}
 	if(!regex_acc.test(user_name.value)){
-		message += "-Sai tên tài khoản!\n";
+		message += "-Invalid username! Username must between 6 and 20 characters and not contain special characters!\n";
 		bool = true;
 	}
-	if(!regex_acc.test(pwd.value)){
-		message += "-Mật khẩu phải từ 6 đến 20 kí tự và không chứa kí tự đặc biệt!\n";
+	if(!regex_acc.test(pass.value)){
+		message += "-Password must be between 6 and 20 characters and not contain special characters!\n";
 		bool = true;
 	}
-	if(pwd.value != pwd_again.value){
-		message += "-Mật khẩu nhập lại sai!\n";
+	if(pass.value != pass_again.value){
+		message += "-Invalid reenter password!\n";
 		bool = true;
 	}
+
 	if(bool){
-		e.preventDefault();
+		event.preventDefault();
+		console.log('aaaa');
 		window.alert(message);
-        return false;
+		return false;
 	}
-	window.alert("Đăng ký thành công!");
-    return true;
+
+	return true;
 }

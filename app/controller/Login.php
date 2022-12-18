@@ -1,9 +1,15 @@
 <?php
 class Login extends Controller {
     private $data;
+    private $db;
+    private $conn;
+
+    private $accountModel;
 
     function __construct(){
-        $this->data['content'] = 'Login/login_form';
+        $this->db = new DataBase;
+        $this->conn = $this->db->connectDB();
+        $this->accountModel = $this->model('AccountModel');
     }
 
     function index(){
@@ -12,8 +18,7 @@ class Login extends Controller {
             $response->redirect();
             exit;
         }
-        $this->data['content'] = 'Login/login_form';
-        $this->render('Layout/Main',$this->data);
+        $this->render('Login/login_form');
     }
     
     function register_form(){
@@ -22,9 +27,10 @@ class Login extends Controller {
             $response->redirect();
             exit;
         }
-        $this->data['content'] = 'Login/register_form';
-        $this->render('Layout/Main',$this->data);
+        $this->render('Login/register_form');
     }
+
+    
 
     function register(){
         $response = new Response();
@@ -34,45 +40,50 @@ class Login extends Controller {
         }
         $request = new Request();
         $request_data = $request->getData();
-        $accountModel = $this->model('AccountModel');
-        if($accountModel->validate($request_data)){
-            $database = new DataBase();
-            $con = $database->connectDB();
+        if($this->accountModel->validate($request_data)){
             extract($request_data);
-            $path = "INSERT INTO thanhvien(name,phone,email,user_name,password,type) VALUES ('$name',$phone,'$email','$user_name','$password','user')";
-            mysqli_query($con,$path);
+            $newID = $this->accountModel->createUserID(); 
+
+            $sql = "INSERT INTO userchatchit(ID,Name,PhoneNumber,Email) VALUES ('$newID','$name','$phone','$email');";
+            mysqli_query($this->conn,$sql);
+
+            $sql = "INSERT INTO account(UserName,Pass,ID) VALUES ('$user_name','$password','$newID');";
+            mysqli_query($this->conn,$sql);
+
+            $_SESSION['signupError'] = false;
+
             $response->redirect('Login');
-            echo '<script>window.alert("Đăng kí thành công!")</script>';
         }else{
+            $_SESSION['signupError'] = true;
             $response->redirect('Login/register_form');
-            echo '<script>window.alert("Có lỗi xảy ra, xin hãy đăng ký lại!")</script>';
         }
     }
 
     function login(){
         $response = new Response();
+
         if(isset($_SESSION['login'])){
             $response->redirect();
             exit;
         }
+
         $request = new Request();
         $req_data = $request->getData();
-        $user_name = $req_data['user_name'];
+        $userName = $req_data['user_name'];
         $password = $req_data['password'];
-        $database = new DataBase();
-        $con = $database->connectDB();
-        $mysql_path = "SELECT id,type FROM thanhvien WHERE user_name='$user_name' and password='$password' LIMIT 1";
-        $query = mysqli_query($con,$mysql_path);
-        if(mysqli_num_rows($query)==1){
-            $login_data = mysqli_fetch_array($query);
-            $_SESSION["login"] = true;
-            $_SESSION["id"] = $login_data['id'];
-            $_SESSION["type"] = $login_data['type'];
-            $response->redirect();
-        }else{
+
+        $ID = $this->accountModel->getID($userName,$password);
+
+        if(!$ID){
+            $_SESSION['loginError'] = true;
             $response->redirect('Login');
         }
+
+        $_SESSION["login"]["ID"] = $ID;
+        $_SESSION['loginError'] = false;
+        $response->redirect();
     }
+
     function logout(){
         $response = new Response();
         if(!isset($_SESSION['login'])){
@@ -80,13 +91,7 @@ class Login extends Controller {
             exit;
         }
         unset($_SESSION['login']);
-        unset($_SESSION['id']);
-        unset($_SESSION['type']);
         $response->redirect();
-    }
-
-    function detail(){
-        echo 1;
     }
 }
 ?>
