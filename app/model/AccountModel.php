@@ -60,7 +60,7 @@ class AccountModel {
     }
 
     function findContacts($ID,$str) {
-        $sql = "SELECT * FROM userchatchit WHERE ID <> '$ID' AND Name LIKE '%$str%' OR PhoneNumber LIKE '%$str%' OR Email LIKE '%$str%'";
+        $sql = "SELECT * FROM userchatchit WHERE ID <> '$ID' AND (Name LIKE '%$str%' OR PhoneNumber LIKE '%$str%' OR Email LIKE '%$str%')";
         return $this->conn->query($sql);
     }
 
